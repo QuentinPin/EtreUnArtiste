@@ -21,6 +21,7 @@ public class ActionSelectionner extends AbstractAction
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        OutilSelectionner outilSelectionner = new OutilSelectionner();
+        this.panneauDessin.associerOutil(new OutilSelectionner());
+
     }
 }

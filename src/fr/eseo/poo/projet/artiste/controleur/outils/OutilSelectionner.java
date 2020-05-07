@@ -31,7 +31,7 @@ public class OutilSelectionner extends Outil
         }
         if (this.formeSelectionnee != null)
         {
-            JOptionPane.showMessageDialog(this.getPanneauDessin(), this.formeSelectionnee,
+            JOptionPane.showMessageDialog(this.getPanneauDessin(), this.formeSelectionnee.toString(),
                     ActionSelectionner.NOM_ACTION, JOptionPane.INFORMATION_MESSAGE);
         }
     }

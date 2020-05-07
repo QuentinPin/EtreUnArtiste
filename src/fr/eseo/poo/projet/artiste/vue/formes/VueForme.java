@@ -20,4 +20,10 @@ public abstract class VueForme
     }
 
     public abstract void affiche(Graphics2D g2d);
+
+    @Override
+    public String toString()
+    {
+        return forme.toString();
+    }
 }
