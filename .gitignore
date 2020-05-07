@@ -1,2 +1,5 @@
 /acsm2020.jnlp
-/*.class
+*.class
+*.iml
+*.acsm
+out/
