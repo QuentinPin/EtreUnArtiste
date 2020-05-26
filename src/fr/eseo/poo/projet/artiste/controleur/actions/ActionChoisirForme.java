@@ -39,6 +39,8 @@ public class ActionChoisirForme extends AbstractAction
             case NOM_ACTION_CERCLE:
                 this.panneauDessin.associerOutil(new OutilCercle());
                 break;
+            default:
+                System.err.println("L'action demander ne fait pas partie de la liste");
         }
     }
 }

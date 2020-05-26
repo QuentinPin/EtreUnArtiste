@@ -110,6 +110,6 @@ public class Ligne extends Forme
             angle = angle + 360;
         }
         return "[Ligne] c1 : " + getC1() + " c2 : " + getC2() + " longueur : " +
-                format.format(getC1().distanceVers(getC2())) + " angle : " + format.format(angle) + "°";
+                format.format(getC1().distanceVers(getC2())) + " angle : " + format.format(angle) + "° " + this.couleurToString();
     }
 }

@@ -1,18 +1,23 @@
 package fr.eseo.poo.projet.artiste.modele.formes;
 
+import fr.eseo.poo.projet.artiste.modele.Coloriable;
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
+import javax.swing.UIManager;
+import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public abstract class Forme
+public abstract class Forme implements Coloriable
 {
     public static final double LARGEUR_PAR_DEFAUT = 40;
     public static final double HAUTEUR_PAR_DEFAUT = 20;
+    public static final Color COULEUR_PAR_DEFAUT = UIManager.getColor("Panel.foreground");
 
     private double largeur;
     private double hauteur;
     private Coordonnees position;
+    private Color couleur;
 
     public Forme()
     {
@@ -29,6 +34,7 @@ public abstract class Forme
         this.setPosition(position);
         this.setLargeur(largeur);
         this.setHauteur(hauteur);
+        this.couleur = COULEUR_PAR_DEFAUT;
     }
 
     public Forme(double largeur, double hauteur)
@@ -129,8 +135,32 @@ public abstract class Forme
 
     public abstract boolean contient(Coordonnees c);
 
-    public String toString()
+    @Override
+    public Color getCouleur()
     {
+        return this.couleur;
+    }
+
+    @Override
+    public void setCouleur(Color couleur)
+    {
+        if (null != couleur)
+            this.couleur = couleur;
+    }
+
+    public String couleurToString()
+    {
+        String couleurEnString = "couleur = ";
+        Locale locale = Locale.getDefault();
+        if (locale.getLanguage().equals("fr"))
+            couleurEnString += "R" + this.getCouleur().getRed() + ",V" + this.getCouleur().getGreen() + ",B" + this.getCouleur().getBlue();
+        else
+            couleurEnString += "R" + this.getCouleur().getRed() + ",G" + this.getCouleur().getGreen() + ",B" + this.getCouleur().getBlue();
+        return couleurEnString;
+    }
+
+    public String toString()
+    {// Cette méthode est issu d'une réflexion de groupe avec Baptiste Guérin, Evan Delaunay et Adrien Castanier
         Locale locale = Locale.getDefault();
         NumberFormat format = NumberFormat.getInstance(locale);
         format.setMaximumFractionDigits(2);

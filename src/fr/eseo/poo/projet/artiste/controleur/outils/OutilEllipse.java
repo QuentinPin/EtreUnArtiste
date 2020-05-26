@@ -15,6 +15,8 @@ public class OutilEllipse extends OutilForme
         double maxX = Math.max(getDebut().getAbscisse(), getFin().getAbscisse());
         double maxY = Math.max(getDebut().getOrdonnee(), getFin().getOrdonnee());
         Ellipse ellipse = new Ellipse(new Coordonnees(minX, minY), maxX - minX, maxY - minY);
+        ellipse.setCouleur(getPanneauDessin().getCouleurCourante());
+        ellipse.setRempli(getPanneauDessin().getModeRemplissage());
         return new VueEllipse(ellipse);
     }
 }

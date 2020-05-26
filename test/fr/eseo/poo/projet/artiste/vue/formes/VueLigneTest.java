@@ -33,7 +33,9 @@ public class VueLigneTest
     {
         JFrame maFenetre = new JFrame("Blues du Businessman");
         PanneauDessin panneauDessin = new PanneauDessin(200, 200, Color.WHITE);
-        panneauDessin.ajouterVueForme(new VueLigne(new Ligne(new Coordonnees(50, 70), 200, 90)));
+        Ligne uneLigne = new Ligne(new Coordonnees(50, 70), 200, 90);
+        uneLigne.setCouleur(Color.RED);
+        panneauDessin.ajouterVueForme(new VueLigne(uneLigne));
         panneauDessin.ajouterVueForme(new VueLigne(new Ligne(new Coordonnees(150, 150), 300, 300)));
         maFenetre.add(panneauDessin);
         maFenetre.setSize(new Dimension(1000, 1000));

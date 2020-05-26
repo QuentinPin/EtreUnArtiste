@@ -78,7 +78,7 @@ public class CercleTest
         Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
         Locale.setDefault(new Locale("fr"));
         assertEquals("Erreur sur le toString en 'fr'",
-                "[Cercle] : pos (8,0 , 9,0) dim 26,0 x 26,0 périmètre : 81,68 aire : 530,93",
+                "[Cercle] : pos (8,0 , 9,0) dim 26,0 x 26,0 périmètre : 81,68 aire : 530,93 couleur = R51,V51,B51",
                 unCercle.toString());
     }
 
@@ -88,7 +88,29 @@ public class CercleTest
         Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
         Locale.setDefault(new Locale("en"));
         assertEquals("Erreur sur le toString en 'en'",
-                "[Cercle] : pos (8.0 , 9.0) dim 26.0 x 26.0 périmètre : 81.68 aire : 530.93",
+                "[Cercle] : pos (8.0 , 9.0) dim 26.0 x 26.0 périmètre : 81.68 aire : 530.93 couleur = R51,G51,B51",
+                unCercle.toString());
+    }
+
+    @Test
+    public void testToStringFR_rempli()
+    {
+        Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
+        unCercle.setRempli(true);
+        Locale.setDefault(new Locale("fr"));
+        assertEquals("Erreur sur le toString en 'fr' pour rempli",
+                "[Cercle-Rempli] : pos (8,0 , 9,0) dim 26,0 x 26,0 périmètre : 81,68 aire : 530,93 couleur = R51,V51,B51",
+                unCercle.toString());
+    }
+
+    @Test
+    public void testToStringEN_rempli()
+    {
+        Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
+        unCercle.setRempli(true);
+        Locale.setDefault(new Locale("en"));
+        assertEquals("Erreur sur le toString en 'en' pour rempli",
+                "[Cercle-Rempli] : pos (8.0 , 9.0) dim 26.0 x 26.0 périmètre : 81.68 aire : 530.93 couleur = R51,G51,B51",
                 unCercle.toString());
     }
 }

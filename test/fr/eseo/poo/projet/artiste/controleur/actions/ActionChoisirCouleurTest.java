@@ -1,16 +1,16 @@
-package fr.eseo.poo.projet.artiste.vue.formes;
+package fr.eseo.poo.projet.artiste.controleur.actions;
 
-import fr.eseo.poo.projet.artiste.modele.Coordonnees;
-import fr.eseo.poo.projet.artiste.modele.formes.Ellipse;
+import fr.eseo.poo.projet.artiste.controleur.outils.OutilLigne;
+import fr.eseo.poo.projet.artiste.vue.ihm.PanneauBarreOutils;
 import fr.eseo.poo.projet.artiste.vue.ihm.PanneauDessin;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
-
-public class VueEllipseTest
+public class ActionChoisirCouleurTest
 {
     public static void main(String[] args)
     {
@@ -19,27 +19,25 @@ public class VueEllipseTest
             @Override
             public void run()
             {
-                VueEllipseTest p = new VueEllipseTest();
-                p.testVueEllipse();
+                ActionChoisirCouleurTest p = new ActionChoisirCouleurTest();
+                p.testActionChoisirCouleur();
             }
         });
     }
 
-    public VueEllipseTest()
+    public ActionChoisirCouleurTest()
     {
     }
 
-    private void testVueEllipse()
+    private void testActionChoisirCouleur()
     {
         JFrame maFenetre = new JFrame("Blues du Businessman");
         PanneauDessin panneauDessin = new PanneauDessin(200, 200, Color.WHITE);
-        panneauDessin.setModeRemplissage(true);
-        Ellipse uneEllipse = new Ellipse(new Coordonnees(50, 70), 200, 90);
-        uneEllipse.setCouleur(Color.RED);
-        uneEllipse.setRempli(true);
-        panneauDessin.ajouterVueForme(new VueEllipse(uneEllipse));
-        panneauDessin.ajouterVueForme(new VueEllipse(new Ellipse(new Coordonnees(150, 150), 300, 30)));
+        PanneauBarreOutils panneauBarreOutils = new PanneauBarreOutils(panneauDessin);
+        OutilLigne outilLigne = new OutilLigne();
+        panneauDessin.associerOutil(outilLigne);
         maFenetre.add(panneauDessin);
+        maFenetre.add(panneauBarreOutils, BorderLayout.EAST);
         maFenetre.setSize(new Dimension(1000, 1000));
         maFenetre.setLocationRelativeTo(null);
         maFenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,6 +1,7 @@
 package fr.eseo.poo.projet.artiste.vue.ihm;
 
 import fr.eseo.poo.projet.artiste.controleur.outils.Outil;
+import fr.eseo.poo.projet.artiste.modele.formes.Forme;
 import fr.eseo.poo.projet.artiste.vue.formes.VueForme;
 
 import javax.swing.JPanel;
@@ -20,6 +21,8 @@ public class PanneauDessin extends JPanel
 
     private final List<VueForme> vueFormes;
     private Outil outilCourant;
+    private Color couleurCourante;
+    private boolean modeRemplissage;
 
     public PanneauDessin()
     {
@@ -32,6 +35,8 @@ public class PanneauDessin extends JPanel
         super.setPreferredSize(new Dimension(largeur, hauteur));
         super.setBackground(fond);
         vueFormes = new ArrayList();
+        setCouleurCourante(Forme.COULEUR_PAR_DEFAUT);
+        setModeRemplissage(false);
     }
 
     public List<VueForme> getVueFormes()
@@ -85,5 +90,25 @@ public class PanneauDessin extends JPanel
     private void setOutilCourant(Outil outilCourant)
     {
         this.outilCourant = outilCourant;
+    }
+
+    public Color getCouleurCourante()
+    {
+        return couleurCourante;
+    }
+
+    public void setCouleurCourante(Color couleurCourante)
+    {
+        this.couleurCourante = couleurCourante;
+    }
+
+    public boolean getModeRemplissage()
+    {
+        return this.modeRemplissage;
+    }
+
+    public void setModeRemplissage(boolean modeRemplissage)
+    {
+        this.modeRemplissage = modeRemplissage;
     }
 }

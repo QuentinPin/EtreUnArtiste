@@ -130,7 +130,7 @@ public class LigneTest
         Ligne uneLigne = new Ligne(new Coordonnees(3, 8), 7, 0);
         Locale.setDefault(new Locale("fr"));
         assertEquals("Erreur sur le toString en 'fr'",
-                "[Ligne] c1 : (3,0 , 8,0) c2 : (10,0 , 8,0) longueur : 7,0 angle : 0,0°", uneLigne.toString());
+                "[Ligne] c1 : (3,0 , 8,0) c2 : (10,0 , 8,0) longueur : 7,0 angle : 0,0° couleur = R51,V51,B51", uneLigne.toString());
     }
 
     @Test
@@ -139,7 +139,7 @@ public class LigneTest
         Ligne uneLigne = new Ligne(new Coordonnees(3, 8), 7, 0);
         Locale.setDefault(new Locale("en"));
         assertEquals("Erreur sur le toString en 'en'",
-                "[Ligne] c1 : (3.0 , 8.0) c2 : (10.0 , 8.0) longueur : 7.0 angle : 0.0°", uneLigne.toString());
+                "[Ligne] c1 : (3.0 , 8.0) c2 : (10.0 , 8.0) longueur : 7.0 angle : 0.0° couleur = R51,G51,B51", uneLigne.toString());
     }
 
     @Test
@@ -149,7 +149,6 @@ public class LigneTest
         Ligne uneLigne = new Ligne(new Coordonnees(3, 8), 5, -5);
         Locale.setDefault(new Locale("en"));
         assertEquals("Erreur sur le toString en 'en'",
-                "[Ligne] c1 : (3.0 , 8.0) c2 : (8.0 , 3.0) longueur : 7.07 angle : 315.0°", uneLigne.toString());
+                "[Ligne] c1 : (3.0 , 8.0) c2 : (8.0 , 3.0) longueur : 7.07 angle : 315.0° couleur = R51,G51,B51", uneLigne.toString());
     }
-
 }

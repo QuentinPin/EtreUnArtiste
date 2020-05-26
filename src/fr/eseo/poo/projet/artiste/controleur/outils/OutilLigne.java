@@ -12,6 +12,7 @@ public class OutilLigne extends OutilForme
     {
         Ligne ligne = new Ligne(getDebut());
         ligne.setC2(getFin());
+        ligne.setCouleur(getPanneauDessin().getCouleurCourante());
         return new VueLigne(ligne);
     }
 }

@@ -1,12 +1,15 @@
 package fr.eseo.poo.projet.artiste.modele.formes;
 
 import fr.eseo.poo.projet.artiste.modele.Coordonnees;
+import fr.eseo.poo.projet.artiste.modele.Remplissable;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Ellipse extends Forme
+public class Ellipse extends Forme implements Remplissable
 {
+
+    private boolean estRempli;
 
     public Ellipse()
     {
@@ -26,6 +29,7 @@ public class Ellipse extends Forme
     public Ellipse(Coordonnees position, double largeur, double hauteur)
     {
         super(position, largeur, hauteur);
+        this.setRempli(false);
     }
 
     @Override
@@ -84,12 +88,30 @@ public class Ellipse extends Forme
     }
 
     @Override
-    public String toString()
+    public boolean estRempli()
     {
+        return estRempli;
+    }
+
+    @Override
+    public void setRempli(boolean modeRemplissage)
+    {
+        this.estRempli = modeRemplissage;
+    }
+
+    @Override
+    public String toString()
+    {// Cette méthode est issu d'une réflexion de groupe avec Baptiste Guérin, Evan Delaunay et Adrien Castanier
         Locale locale = Locale.getDefault();
         NumberFormat format = NumberFormat.getInstance(locale);
         format.setMaximumFractionDigits(2);
         format.setMinimumFractionDigits(1);
-        return super.toString();
+        format.setGroupingUsed(false);
+        String nomDeLaClass = (estRempli) ? getClass().getSimpleName() + "-Rempli" : getClass().getSimpleName();
+        return "[" + nomDeLaClass + "] : pos (" + format.format(this.getX()) +
+                " , " + format.format(this.getY()) + ") dim " + format.format(this.getLargeur()) +
+                " x " + format.format(this.getHauteur()) + " périmètre : " +
+                format.format(this.perimetre()) + " aire : " + format.format(this.aire())
+                + " " + this.couleurToString();
     }
 }

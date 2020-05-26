@@ -42,6 +42,8 @@ public class OutilCercle extends OutilForme
                 positionY = getDebut().getOrdonnee() - diametre;
         }
         Cercle cercle = new Cercle(new Coordonnees(positionX, positionY), diametre);
+        cercle.setCouleur(getPanneauDessin().getCouleurCourante());
+        cercle.setRempli(getPanneauDessin().getModeRemplissage());
         return new VueCercle(cercle);
     }
 }
