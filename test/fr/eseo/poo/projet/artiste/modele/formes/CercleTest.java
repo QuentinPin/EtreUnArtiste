@@ -93,7 +93,7 @@ public class CercleTest
     }
 
     @Test
-    public void testToStringFR_rempli()
+    public void testToStringFRRempli()
     {
         Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
         unCercle.setRempli(true);
@@ -104,7 +104,7 @@ public class CercleTest
     }
 
     @Test
-    public void testToStringEN_rempli()
+    public void testToStringENRempli()
     {
         Cercle unCercle = new Cercle(new Coordonnees(8, 9), 26);
         unCercle.setRempli(true);

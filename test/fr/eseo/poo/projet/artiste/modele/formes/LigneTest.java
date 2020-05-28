@@ -143,7 +143,7 @@ public class LigneTest
     }
 
     @Test
-    public void testToStringEN_angleNegatif()
+    public void testToStringENAngleNegatif()
     {
         // Adrien Castanié ma donné ce jeu de test
         Ligne uneLigne = new Ligne(new Coordonnees(3, 8), 5, -5);

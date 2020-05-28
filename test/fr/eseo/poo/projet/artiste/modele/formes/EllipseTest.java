@@ -29,13 +29,13 @@ public class EllipseTest
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructeurAvecDeuxValeur_largeurNégative()
+    public void testConstructeurAvecDeuxValeurLargeurNegative()
     {
         new Ellipse(-4, 7);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testConstructeurAvecDeuxValeur_hauteurNégative()
+    public void testConstructeurAvecDeuxValeurHauteurNegative()
     {
         new Ellipse(4, -7);
     }
@@ -114,7 +114,8 @@ public class EllipseTest
     {
         Ellipse uneEllipse = new Ellipse(new Coordonnees(8, 9), 26, 80);
         Locale.setDefault(new Locale("fr"));
-        assertEquals("Erreur sur le toString en 'fr'", "[Ellipse] : pos (8,0 , 9,0) dim 26,0 x 80,0 périmètre : 177,5 aire : 1633,63 couleur = R51,V51,B51", uneEllipse.toString());
+        assertEquals("Erreur sur le toString en 'fr'", "[Ellipse] : pos (8,0 , 9,0) dim 26,0 x 80,0 périmètre : 177,5 aire : " +
+                "1633,63 couleur = R51,V51,B51", uneEllipse.toString());
     }
 
     @Test
@@ -122,11 +123,12 @@ public class EllipseTest
     {
         Ellipse uneEllipse = new Ellipse(new Coordonnees(8, 9), 26, 80);
         Locale.setDefault(new Locale("en"));
-        assertEquals("Erreur sur le toString en 'en'", "[Ellipse] : pos (8.0 , 9.0) dim 26.0 x 80.0 périmètre : 177.5 aire : 1633.63 couleur = R51,G51,B51", uneEllipse.toString());
+        assertEquals("Erreur sur le toString en 'en'", "[Ellipse] : pos (8.0 , 9.0) dim 26.0 x 80.0 périmètre : " +
+                "177.5 aire : 1633.63 couleur = R51,G51,B51", uneEllipse.toString());
     }
 
     @Test
-    public void testToStringFR_rempli()
+    public void testToStringFRRempli()
     {
         Ellipse uneEllipse = new Ellipse(new Coordonnees(8, 9), 26, 80);
         uneEllipse.setRempli(true);
@@ -136,7 +138,7 @@ public class EllipseTest
     }
 
     @Test
-    public void testToStringEN_rempli()
+    public void testToStringENRempli()
     {
         Ellipse uneEllipse = new Ellipse(new Coordonnees(8, 9), 26, 80);
         uneEllipse.setRempli(true);
