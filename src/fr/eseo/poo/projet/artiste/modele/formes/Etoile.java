@@ -94,6 +94,8 @@ public class Etoile extends Forme implements Remplissable
     @Override
     public void setLargeur(double largeur)
     {
+        if (largeur < 0)
+            throw new IllegalArgumentException("La largeur ne peut pas être négative");
         super.setLargeur(largeur);
         super.setHauteur(largeur);
         this.calculeDesCoordonnee();
@@ -102,6 +104,8 @@ public class Etoile extends Forme implements Remplissable
     @Override
     public void setHauteur(double hauteur)
     {
+        if (hauteur < 0)
+            throw new IllegalArgumentException("La hauteur ne peut pas être négative");
         super.setLargeur(hauteur);
         super.setHauteur(hauteur);
         this.calculeDesCoordonnee();
@@ -185,11 +189,53 @@ public class Etoile extends Forme implements Remplissable
     }
 
     @Override
-    public boolean contient(Coordonnees c)
+    public boolean contient(Coordonnees coordonneesACheck)
     {
-        //TODO : faire la méthode contient
-        return isInside(coordonnees.size(), c);
+        double[] xp = new double[getCoordonnees().size()];
+        double[] yp = new double[getCoordonnees().size()];
+        for (Coordonnees uneCoordonnees : getCoordonnees())
+        {
+            xp[getCoordonnees().indexOf(uneCoordonnees)] = uneCoordonnees.getAbscisse();
+            yp[getCoordonnees().indexOf(uneCoordonnees)] = uneCoordonnees.getOrdonnee();
+        }
+        return estDansEtoile(getCoordonnees().size(), xp, yp, coordonneesACheck) || estSurUnSegmentEtoile(coordonneesACheck);
     }
+
+    private boolean estSurUnSegmentEtoile(Coordonnees coordonneesACheck)
+    {
+        Coordonnees ancienneCoordonnees = null;
+        for (Coordonnees uneCoordonnees : getCoordonnees())
+        {
+            if (getCoordonnees().indexOf(uneCoordonnees) != 0)
+            {
+                Ligne uneLigne = new Ligne(uneCoordonnees);
+                uneLigne.setC2(ancienneCoordonnees);
+                if (uneLigne.contient(coordonneesACheck))
+                    return true;
+            }
+            ancienneCoordonnees = uneCoordonnees;
+        }
+        return false;
+    }
+
+    // Cette méthode provien du site : http://www.faqs.org/faqs/graphics/algorithms-faq/
+    public boolean estDansEtoile(int npol, double[] xp, double[] yp, Coordonnees coordonneesACheck)
+    {
+        double x = coordonneesACheck.getAbscisse();
+        double y = coordonneesACheck.getOrdonnee();
+        boolean c = false;
+        for (int i = 0, j = npol - 1; i < npol; j = i++)
+        {
+            boolean bool1 = (yp[i] <= y && y < yp[j] || yp[j] <= y && y < yp[i]);
+            boolean bool2 = x < (xp[j] - xp[i]) * (y - yp[i]) / (yp[j] - yp[i]) + xp[i];
+            if (bool1 && bool2)
+            {
+                c = !c;
+            }
+        }
+        return c;
+    }
+
 
     @Override
     public String toString()
@@ -205,64 +251,5 @@ public class Etoile extends Forme implements Remplissable
                 " x " + format.format(this.getHauteur()) + " périmètre : " +
                 format.format(this.perimetre()) + " aire : " + format.format(this.aire())
                 + " " + this.couleurToString();
-    }
-
-    // Toutes les fonction si dessous vienne du site : https://www.sanfoundry.com/java-program-check-whether-given-point-lies-given-polygon/
-    public boolean onSegment(Coordonnees p, Coordonnees q, Coordonnees r)
-    {
-        if (q.getAbscisse() <= Math.max(p.getAbscisse(), r.getAbscisse()) && q.getAbscisse() >= Math.min(p.getAbscisse(), r.getAbscisse())
-                && q.getOrdonnee() <= Math.max(p.getOrdonnee(), r.getOrdonnee()) && q.getOrdonnee() >= Math.min(p.getOrdonnee(), r.getOrdonnee()))
-            return true;
-        return false;
-    }
-
-    public int orientation(Coordonnees p, Coordonnees q, Coordonnees r)
-    {
-        double val = (q.getOrdonnee() - p.getOrdonnee()) * (r.getAbscisse() - q.getAbscisse()) -
-                (q.getAbscisse() - p.getAbscisse()) * (r.getOrdonnee() - q.getOrdonnee());
-        if (val == 0)
-            return 0;
-        return (val > 0) ? 1 : 2;
-    }
-
-    public boolean doIntersect(Coordonnees p1, Coordonnees q1, Coordonnees p2, Coordonnees q2)
-    {
-        boolean res = false;
-        int o1 = orientation(p1, q1, p2);
-        int o2 = orientation(p1, q1, q2);
-        int o3 = orientation(p2, q2, p1);
-        int o4 = orientation(p2, q2, q1);
-        if (o1 != o2 && o3 != o4)
-            res = true;
-        if (o1 == 0 && onSegment(p1, p2, q1))
-            res = true;
-        if (o2 == 0 && onSegment(p1, q2, q1))
-            res = true;
-        if (o3 == 0 && onSegment(p2, p1, q2))
-            res = true;
-        if (o4 == 0 && onSegment(p2, q1, q2))
-            res = true;
-        return res;
-    }
-
-    public boolean isInside(int n, Coordonnees p)
-    {
-        int inf = 10000;
-        if (n < 3)
-            return false;
-        Coordonnees extreme = new Coordonnees(inf, p.getOrdonnee());
-        int count = 0, i = 0;
-        do
-        {
-            int next = (i + 1) % n;
-            if (doIntersect(coordonnees.get(i), coordonnees.get(next), p, extreme))
-            {
-                if (orientation(coordonnees.get(i), p, coordonnees.get(next)) == 0)
-                    return onSegment(coordonnees.get(i), p, coordonnees.get(next));
-                count++;
-            }
-            i = next;
-        } while (i != 0);
-        return (count & 1) == 1 ? true : false;
     }
 }

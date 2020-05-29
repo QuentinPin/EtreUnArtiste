@@ -5,7 +5,6 @@ import fr.eseo.poo.projet.artiste.modele.Coordonnees;
 
 import javax.swing.UIManager;
 import java.awt.Color;
-import java.text.NumberFormat;
 import java.util.Locale;
 
 public abstract class Forme implements Coloriable
@@ -157,18 +156,5 @@ public abstract class Forme implements Coloriable
         else
             couleurEnString += "R" + this.getCouleur().getRed() + ",G" + this.getCouleur().getGreen() + ",B" + this.getCouleur().getBlue();
         return couleurEnString;
-    }
-
-    public String toString()
-    {// Cette méthode est issu d'une réflexion de groupe avec Baptiste Guérin, Evan Delaunay et Adrien Castanier
-        Locale locale = Locale.getDefault();
-        NumberFormat format = NumberFormat.getInstance(locale);
-        format.setMaximumFractionDigits(2);
-        format.setMinimumFractionDigits(1);
-        format.setGroupingUsed(false);
-        return "[" + getClass().getSimpleName() + "] : pos (" + format.format(this.getX()) +
-                " , " + format.format(this.getY()) + ") dim " + format.format(this.getLargeur()) +
-                " x " + format.format(this.getHauteur()) + " périmètre : " +
-                format.format(this.perimetre()) + " aire : " + format.format(this.aire()) + "";
     }
 }
